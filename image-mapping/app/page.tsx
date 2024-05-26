@@ -1,10 +1,11 @@
-import styles from "./page.module.css";
+import Factory from "@/components/3d-factory/page";
 import ImagesMapper from "@/components/image-mapper/page";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <ImagesMapper />
+    <main>
+      {/* <ImagesMapper /> */}
+      <Factory />
     </main>
   );
 }
