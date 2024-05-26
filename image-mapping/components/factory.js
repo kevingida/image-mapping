@@ -49,11 +49,8 @@ export function FactoryModel(props) {
         position={[-2.588, -0.316, -0.629]}
         rotation={[Math.PI / 2, 0, -Math.PI / 2]}
       >
-        <Html distanceFactor={10}>
-          <div class="content">
-            <button>ASTRAZENECA</button>
-            ASTRAZENECA
-          </div>
+        <Html distanceFactor={10} position={[-2, 4, -1]}>
+          <button>SITE RESPIRATORY</button>
         </Html>
         <meshStandardMaterial map={light} />
       </mesh>
