@@ -1,28 +1,18 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { TextureLoader, Scene } from "three";
-import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/Addons.js";
+import { TextureLoader } from "three";
 import { Html } from "@react-three/drei";
+import toast, { Toaster } from "react-hot-toast";
 
 export function FactoryModel(props) {
-  const { nodes, materials } = useGLTF("/factory.glb");
-  const terrain = useLoader(TextureLoader, "/textures/terrain-2.jpg");
-  const light = useLoader(TextureLoader, "/textures/light.jpg");
+  const { nodes, materials } = useGLTF("/factory/factory.glb");
+  const terrain = useLoader(TextureLoader, "/factory/textures/terrain-2.jpg");
+  const light = useLoader(TextureLoader, "/factory/textures/light.jpg");
 
-  const labelRenderer = new CSS2DRenderer();
-  labelRenderer.setSize(window.innerWidth, window.innerHeight);
-  labelRenderer.domElement.style.position = "absolute";
-  labelRenderer.domElement.style.top = "0px";
-  labelRenderer.domElement.style.pointerEvents = "none";
-  document.body.appendChild(labelRenderer.domElement);
-
-  const p = document.createElement("p");
-  p.textContent = "ASTRAZENECA";
-  const cPointLabel = new CSS2DObject(p);
-  const scene = new Scene();
-  scene.add(cPointLabel);
-  cPointLabel.position.set(-6, 0.8, 4);
+  const clicked = (area) => {
+    return toast.success("success");
+  };
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -50,7 +40,12 @@ export function FactoryModel(props) {
         rotation={[Math.PI / 2, 0, -Math.PI / 2]}
       >
         <Html distanceFactor={10} position={[-2, 4, -1]}>
-          <button>SITE RESPIRATORY</button>
+          <button onClick={(e) => clicked(e)}>SITE RESPIRATORY</button>
+          <Toaster position="top-center" reverseOrder={false} />
+        </Html>
+        <Html distanceFactor={10} position={[-2, 8, -1]}>
+          <button onClick={(e) => clicked(e)}>SITE STERILE</button>
+          <Toaster position="top-center" reverseOrder={false} />
         </Html>
         <meshStandardMaterial map={light} />
       </mesh>
@@ -70,7 +65,12 @@ export function FactoryModel(props) {
         geometry={nodes.mudacDetailsMerged.geometry}
         material={nodes.mudacDetailsMerged.material}
         position={[1.768, 0, 0.262]}
-      />
+      >
+        <Html distanceFactor={10} position={[-5.8, 0.5, -0.8]}>
+          <button onClick={(e) => clicked(e)}>Restaurant</button>
+          <Toaster position="top-center" reverseOrder={false} />
+        </Html>
+      </mesh>
     </group>
   );
 }
